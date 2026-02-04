@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全国特种设备公示信息查询平台</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .sub-header {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            margin-bottom: 25px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .info-table th, .info-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .info-table th {
+            background-color: #f9f9f9;
+            width: 30%;
+        }
+        .verify-section {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .verify-code {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .verify-code input {
+            padding: 8px;
+            width: 150px;
+            border: 1px solid #ddd;
+        }
+        .verify-code img {
+            background-color: #f0f0f0;
+            padding: 5px;
+        }
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .btn-blue {
+            background-color: #0066cc;
+            color: #fff;
+        }
+        .btn-gray {
+            background-color: #ddd;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">全国特种设备公示信息查询平台</div>
+    <div class="sub-header">全国特种设备公示信息查询平台</div>
+
+    <!-- 第一部分：详情表格 -->
+    <table class="info-table">
+        <tr><th>身份证号</th><td>【替换为你的身份证号】</td></tr>
+        <tr><th>姓名</th><td>【替换为你的姓名】</td></tr>
+        <tr><th>性别</th><td>【替换为你的性别】</td></tr>
+        <tr><th>证书类别</th><td>特种设备作业人员</td></tr>
+        <tr><th>证书编号</th><td>【替换为你的证书编号】</td></tr>
+        <tr><th>发证机关</th><td>【替换为你的发证机关】</td></tr>
+        <tr><th>发证机关所在地</th><td>【替换为你的发证机关所在地】</td></tr>
+        <tr><th>从业种类</th><td>作业人员</td></tr>
+        <tr><th>取证方式</th><td>【替换为你的取证方式】</td></tr>
+        <tr><th>考核单位</th><td>【替换为你的考核单位】</td></tr>
+        <tr><th>考核日期</th><td>【替换为你的考核日期】</td></tr>
+        <tr><th>持证项目</th><td>【替换为你的持证项目】</td></tr>
+        <tr><th>批准日期</th><td>【替换为你的批准日期】</td></tr>
+        <tr><th>批准单位</th><td>【替换为你的批准单位】</td></tr>
+        <tr><th>有效日期</th><td>【替换为你的有效日期】</td></tr>
+        <tr><th>备注</th><td></td></tr>
+    </table>
+
+    <table class="info-table">
+        <tr><th>身份证号</th><td>【替换为你的身份证号】</td></tr>
+        <tr><th>姓名</th><td>【替换为你的姓名】</td></tr>
+        <tr><th>性别</th><td>【替换为你的性别】</td></tr>
+        <tr><th>证书类别</th><td>特种设备作业人员</td></tr>
+        <tr><th>证书编号</th><td>【替换为你的证书编号】</td></tr>
+        <tr><th>发证机关</th><td>【替换为你的发证机关】</td></tr>
+        <tr><th>发证机关所在地</th><td>【替换为你的发证机关所在地】</td></tr>
+        <tr><th>从业种类</th><td>作业人员</td></tr>
+        <tr><th>取证方式</th><td>【替换为你的取证方式】</td></tr>
+        <tr><th>考核单位</th><td>【替换为你的考核单位】</td></tr>
+        <tr><th>考核日期</th><td>【替换为你的考核日期】</td></tr>
+        <tr><th>持证项目</th><td>【替换为你的持证项目】</td></tr>
+        <tr><th>批准日期</th><td>【替换为你的批准日期】</td></tr>
+        <tr><th>批准单位</th><td>【替换为你的批准单位】</td></tr>
+        <tr><th>有效日期</th><td>【替换为你的有效日期】</td></tr>
+        <tr><th>备注</th><td></td></tr>
+    </table>
+
+    <!-- 第二部分：验证界面 -->
+    <div class="verify-section">
+        <p>您查询的人员公示基本信息如下：</p>
+        <p>姓名：【替换为你的姓名】</p>
+        <p>证书编号：【替换为你的证书编号】</p>
+        <p>如需查看详细信息，请在下方输入验证码后，点击“显示详情”</p>
+        <p style="color: red;">请在82秒内完成验证查询。超时后，请重新扫码查验。</p>
+
+        <div class="verify-code">
+            <input type="text" placeholder="请输入验证码">
+            <img src="https://via.placeholder.com/100x40?text=XzNR" alt="验证码">
+        </div>
+
+        <button class="btn btn-blue">显示详情</button>
+        <button class="btn btn-gray">清空</button>
+    </div>
+</body>
+</html>
