@@ -3,138 +3,458 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全国特种设备公示信息查询平台</title>
+    <meta name="description" content="学术个人主页 - 研究方向、发表论文与学术联系方式">
+    <title>你的姓名 | Academic Homepage</title>
     <style>
-        body {
-            font-family: "Microsoft YaHei", sans-serif;
+        * {
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .header {
-            background-color: #000;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            font-size: 18px;
-            margin-bottom: 20px;
+
+        :root {
+            --primary: #0f3460;
+            --secondary: #16537e;
+            --accent: #e94560;
+            --text-dark: #1a1a2e;
+            --text-gray: #5a6270;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border: #e2e8f0;
+            --shadow: 0 4px 20px rgba(15, 52, 96, 0.08);
+            --shadow-hover: 0 8px 30px rgba(15, 52, 96, 0.12);
         }
-        .sub-header {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-align: center;
+
+        html {
+            scroll-behavior: smooth;
         }
-        .info-table {
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.7;
+        }
+
+        /* 导航栏 */
+        nav {
+            position: fixed;
+            top: 0;
             width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-            margin-bottom: 25px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
         }
-        .info-table th, .info-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-        .info-table th {
-            background-color: #f9f9f9;
-            width: 30%;
-        }
-        .verify-section {
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
-        }
-        .verify-code {
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 64px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin: 15px 0;
+            justify-content: space-between;
         }
-        .verify-code input {
-            padding: 8px;
-            width: 150px;
-            border: 1px solid #ddd;
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--primary);
+            text-decoration: none;
         }
-        .verify-code img {
-            background-color: #f0f0f0;
-            padding: 5px;
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
         }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero 个人简介区 */
+        .hero {
+            padding: 120px 0 60px;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .avatar-placeholder {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 64px;
+            font-weight: 300;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-info h1 {
+            font-size: 38px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .hero-info .title {
+            font-size: 18px;
+            color: var(--text-gray);
+            margin-bottom: 16px;
+        }
+
+        .hero-info .affiliation {
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+        }
+
+        .hero-info .bio {
+            color: var(--text-gray);
+            margin-bottom: 32px;
+            font-size: 15px;
+        }
+
+        /* 学术链接按钮组 */
+        .academic-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
         .btn {
-            padding: 8px 20px;
-            border: none;
-            cursor: pointer;
-            margin-right: 10px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .btn-blue {
-            background-color: #0066cc;
-            color: #fff;
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
         }
-        .btn-gray {
-            background-color: #ddd;
-            color: #333;
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* 通用区块 */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        /* 研究方向 */
+        .research-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .research-card {
+            background: var(--bg-white);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .research-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+            border-color: var(--secondary);
+        }
+
+        .research-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .research-card p {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        /* 论文列表 */
+        .pub-item {
+            background: var(--bg-white);
+            padding: 20px 24px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .pub-item:hover {
+            box-shadow: var(--shadow);
+            transform: translateX(4px);
+        }
+
+        .pub-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            font-size: 16px;
+        }
+
+        .pub-authors {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .pub-venue {
+            color: var(--secondary);
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .pub-links {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+        }
+
+        .pub-links a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px dotted transparent;
+            transition: border-color 0.3s;
+        }
+
+        .pub-links a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        /* 联系方式 */
+        .contact-box {
+            background: var(--bg-white);
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .contact-box p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        /* 页脚 */
+        footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 32px 0;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                justify-items: center;
+                padding-top: 100px;
+            }
+
+            .avatar-placeholder {
+                width: 160px;
+                height: 160px;
+                font-size: 48px;
+            }
+
+            .academic-links {
+                justify-content: center;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .hero-info h1 {
+                font-size: 30px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">全国特种设备公示信息查询平台</div>
-    <div class="sub-header">全国特种设备公示信息查询平台</div>
 
-    <!-- 第一部分：详情表格 -->
-    <table class="info-table">
-        <tr><th>身份证号</th><td>【替换为你的身份证号】</td></tr>
-        <tr><th>姓名</th><td>【替换为你的姓名】</td></tr>
-        <tr><th>性别</th><td>【替换为你的性别】</td></tr>
-        <tr><th>证书类别</th><td>特种设备作业人员</td></tr>
-        <tr><th>证书编号</th><td>【替换为你的证书编号】</td></tr>
-        <tr><th>发证机关</th><td>【替换为你的发证机关】</td></tr>
-        <tr><th>发证机关所在地</th><td>【替换为你的发证机关所在地】</td></tr>
-        <tr><th>从业种类</th><td>作业人员</td></tr>
-        <tr><th>取证方式</th><td>【替换为你的取证方式】</td></tr>
-        <tr><th>考核单位</th><td>【替换为你的考核单位】</td></tr>
-        <tr><th>考核日期</th><td>【替换为你的考核日期】</td></tr>
-        <tr><th>持证项目</th><td>【替换为你的持证项目】</td></tr>
-        <tr><th>批准日期</th><td>【替换为你的批准日期】</td></tr>
-        <tr><th>批准单位</th><td>【替换为你的批准单位】</td></tr>
-        <tr><th>有效日期</th><td>【替换为你的有效日期】</td></tr>
-        <tr><th>备注</th><td></td></tr>
-    </table>
+<!-- 导航栏 -->
+<nav>
+    <div class="nav-container">
+        <a href="#" class="nav-logo">你的姓名</a>
+        <ul class="nav-links">
+            <li><a href="#about">关于我</a></li>
+            <li><a href="#research">研究方向</a></li>
+            <li><a href="#publications">发表论文</a></li>
+            <li><a href="#contact">联系方式</a></li>
+        </ul>
+    </div>
+</nav>
 
-    <table class="info-table">
-        <tr><th>身份证号</th><td>【替换为你的身份证号】</td></tr>
-        <tr><th>姓名</th><td>【替换为你的姓名】</td></tr>
-        <tr><th>性别</th><td>【替换为你的性别】</td></tr>
-        <tr><th>证书类别</th><td>特种设备作业人员</td></tr>
-        <tr><th>证书编号</th><td>【替换为你的证书编号】</td></tr>
-        <tr><th>发证机关</th><td>【替换为你的发证机关】</td></tr>
-        <tr><th>发证机关所在地</th><td>【替换为你的发证机关所在地】</td></tr>
-        <tr><th>从业种类</th><td>作业人员</td></tr>
-        <tr><th>取证方式</th><td>【替换为你的取证方式】</td></tr>
-        <tr><th>考核单位</th><td>【替换为你的考核单位】</td></tr>
-        <tr><th>考核日期</th><td>【替换为你的考核日期】</td></tr>
-        <tr><th>持证项目</th><td>【替换为你的持证项目】</td></tr>
-        <tr><th>批准日期</th><td>【替换为你的批准日期】</td></tr>
-        <tr><th>批准单位</th><td>【替换为你的批准单位】</td></tr>
-        <tr><th>有效日期</th><td>【替换为你的有效日期】</td></tr>
-        <tr><th>备注</th><td></td></tr>
-    </table>
+<div class="container">
 
-    <!-- 第二部分：验证界面 -->
-    <div class="verify-section">
-        <p>您查询的人员公示基本信息如下：</p>
-        <p>姓名：【替换为你的姓名】</p>
-        <p>证书编号：【替换为你的证书编号】</p>
-        <p>如需查看详细信息，请在下方输入验证码后，点击“显示详情”</p>
-        <p style="color: red;">请在82秒内完成验证查询。超时后，请重新扫码查验。</p>
+    <!-- 个人简介区 -->
+    <section class="hero" id="about">
+        <div class="avatar-placeholder">姓</div>
+        <div class="hero-info">
+            <h1>你的姓名</h1>
+            <div class="title">博士 / 副教授 / 博士后</div>
+            <div class="affiliation">XX大学 XX学院 / XX实验室</div>
+            <p class="bio">
+                简要介绍你的研究背景、研究兴趣和学术经历。例如：主要从事人工智能、机器学习、计算机视觉方向的研究，
+                专注于深度学习模型优化与多模态学习，在顶级会议与期刊发表论文多篇。
+            </p>
+            <div class="academic-links">
+                <a href="https://scholar.google.com/citations?user=你的ID" target="_blank" class="btn btn-primary">
+                    🔍 Google Scholar
+                </a>
+                <a href="https://github.com/你的用户名" target="_blank" class="btn btn-outline">
+                    💻 GitHub
+                </a>
+                <a href="https://www.researchgate.net/profile/你的主页" target="_blank" class="btn btn-outline">
+                    📚 ResearchGate
+                </a>
+                <a href="https://orcid.org/你的ORCID号" target="_blank" class="btn btn-outline">
+                    🆔 ORCID
+                </a>
+            </div>
+        </div>
+    </section>
 
-        <div class="verify-code">
-            <input type="text" placeholder="请输入验证码">
-            <img src="https://via.placeholder.com/100x40?text=XzNR" alt="验证码">
+    <!-- 研究方向 -->
+    <section id="research">
+        <h2 class="section-title">研究方向</h2>
+        <div class="research-list">
+            <div class="research-card">
+                <h3>深度学习</h3>
+                <p>神经网络模型设计、模型压缩与加速、小样本学习与迁移学习相关理论与方法。</p>
+            </div>
+            <div class="research-card">
+                <h3>计算机视觉</h3>
+                <p>图像识别、目标检测、语义分割、多模态视觉理解与工业视觉落地应用。</p>
+            </div>
+            <div class="research-card">
+                <h3>自然语言处理</h3>
+                <p>大语言模型微调、信息抽取、文本生成与多模态大模型对齐技术研究。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 代表性论文 -->
+    <section id="publications">
+        <h2 class="section-title">代表性论文</h2>
+
+        <div class="pub-item">
+            <div class="pub-title">论文标题一：XXXXXXXXX</div>
+            <div class="pub-authors">作者A, 作者B, 作者C, <b>你的姓名</b>, 等</div>
+            <div class="pub-venue">IEEE Transactions on Pattern Analysis and Machine Intelligence, 2025</div>
+            <div class="pub-links">
+                <a href="#" target="_blank">PDF</a>
+                <a href="#" target="_blank">Code</a>
+                <a href="#" target="_blank">DOI</a>
+            </div>
         </div>
 
-        <button class="btn btn-blue">显示详情</button>
-        <button class="btn btn-gray">清空</button>
-    </div>
+        <div class="pub-item">
+            <div class="pub-title">论文标题二：XXXXXXXXX</div>
+            <div class="pub-authors">作者X, <b>你的姓名</b>, 作者Y, 作者Z</div>
+            <div class="pub-venue">Proceedings of the IEEE/CVF Conference on CVPR, 2024</div>
+            <div class="pub-links">
+                <a href="#" target="_blank">PDF</a>
+                <a href="#" target="_blank">Code</a>
+                <a href="#" target="_blank">Project Page</a>
+            </div>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">论文标题三：XXXXXXXXX</div>
+            <div class="pub-authors"><b>你的姓名</b>, 作者M, 作者N</div>
+            <div class="pub-venue">ACL 2024, Findings</div>
+            <div class="pub-links">
+                <a href="#" target="_blank">PDF</a>
+                <a href="#" target="_blank">arXiv</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact">
+        <h2 class="section-title">联系方式</h2>
+        <div class="contact-box">
+            <p>📧 邮箱：your.email@university.edu.cn</p>
+            <p>📍 地址：XX省XX市XX大学XX学院XX实验室</p>
+            <div class="academic-links" style="justify-content: center; margin-top: 20px;">
+                <a href="mailto:your.email@university.edu.cn" class="btn btn-primary">发送邮件</a>
+                <a href="https://scholar.google.com/citations?user=你的ID" target="_blank" class="btn btn-outline">Google Scholar</a>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- 页脚 -->
+<footer>
+    <p>© 2025 你的姓名. All Rights Reserved. | Powered by GitHub Pages</p>
+</footer>
+
 </body>
 </html>
